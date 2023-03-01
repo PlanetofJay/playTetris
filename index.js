@@ -16,7 +16,7 @@ function arenaSweep() {
     const row = arena.splice(y, 1)[0].fill(0);
     arena.unshift(row);
     ++y;
-    player.score += rowCount + 10;
+    player.score += rowCount * 10;
     rowCount *= 2;
     
   }
@@ -237,3 +237,30 @@ document.addEventListener("keydown", (event) => {
   }
 
 });
+
+
+const colors = [
+
+  null,
+  "#ff0d72",
+  "#0dc2ff",
+  "#0dff72",
+  "#f538ff",
+  "#ff8e0d",
+  "#ffe138",
+  "#3877ff",
+
+];
+
+const arena = createMatrix(12, 20);
+const player = {
+
+  pos: {x: 0, y: 0},
+  matrix: null,
+  score: 0,
+
+};
+
+playerReset();
+updateScore();
+update();
