@@ -203,3 +203,37 @@ let dropCounter = 0;
 let dropInterval = 1000;
 let lastTime = 0;
 
+function update(time = 0) {
+
+  const deltaTime = time - lastTime;
+  dropCounter += deltaTime;
+  if(dropCounter > dropInterval) {
+    playerDrop();
+  }
+  lastTime = time;
+  draw();
+  requestAnimationFrame(update);
+
+}
+
+function updateScore() {
+
+  document.getElementById("score").innerText = "Score : " + player.score;
+
+}
+
+document.addEventListener("keydown", (event) => {
+
+  if(event.keyCode === 37) {
+    playerMove(-1);
+  } else if(event.keyCode === 39) {
+    playerMove(1);
+  } else if(event.keyCode === 40) {
+    playerDrop();
+  } else if(event.keyCode === 81) {
+    playerRotate(-1);
+  } else if(event.keyCode === 87) {
+    playerRotate(1);
+  }
+
+});
