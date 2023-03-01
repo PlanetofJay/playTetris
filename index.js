@@ -6,7 +6,7 @@ context.scale(20, 20);
 function arenaSweep() {
   
   let rowCount = 1;
-  outer: for(let y = arena.length; y > 0; --y) {
+  outer: for(let y = arena.length - 1; y > 0; --y) {
     for(let x = 0; x < arena[y].length; ++x) {
       if(arena[y][x] === 0) {
         continue outer;
@@ -42,7 +42,7 @@ function createMatrix(w, h) {
 
   const matrix = [];
   while(h--) {
-    matrix.push(new Array(w), fill(0));
+    matrix.push(new Array(w).fill(0));
   }
   return matrix;
 
@@ -104,8 +104,8 @@ function drawMatrix(matrix, offset) {
         context.fillStyle = colors[value];
         context.fillRect(x + offset.x, y + offset.y, 1, 1);
       }
-    })
-  })
+    });
+  });
 
 }
 
@@ -125,8 +125,8 @@ function merge(arena, player) {
       if(value !== 0) {
         arena[y + player.pos.y][x + player.pos.x] = value;
       }
-    })
-  })
+    });
+  });
 
 }
 
@@ -173,7 +173,7 @@ function playerReset() {
   const pieces = "TJLOSZI";
   player.matrix = createPiece(pieces[(pieces.length * Math.random()) | 0]);
   player.pos.y = 0;
-  player.pos.x = ((arena[0].length / 2) | 0) - ((player.matrix[0] / 2) | 0);
+  player.pos.x = ((arena[0].length / 2) | 0) - ((player.matrix[0].length / 2) | 0);
   if(collide(arena, player)) {
     arena.forEach((row) => row.fill(0));
     player.score = 0;
